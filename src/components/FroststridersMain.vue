@@ -1,15 +1,21 @@
 <template>
-  <div class="Froststriders_Cover">
-    <div class="center" id="content">
-      PROJECT FROSTSTRIDERS:
-      <br/>
-      <div id="target">&nbsp;</div>
+  
+    <div class="Froststriders_Cover" >
+      
+      <div class="center" id="content">
+        PROJECT FROSTSTRIDERS:
+        <br/>
+        <div id="target">&nbsp;</div>
+      </div>
     </div>
-  </div>
 </template>
 
 <script>
-  const OutputFinal = "TLAIR.INITIALIZE();<br/>USER:M.RICHARDS<br/>LOC(-79.04,-70.37)";
+  //import vue from 'vue';
+  //import posed from "vue-pose";
+
+
+  const OutputFinal = "FROSTSTRIDERS_TLAIR.INI()";
   const delay = 75;
   const loops = 20;
 
@@ -34,7 +40,6 @@
     }
     return 0;
   }
-  let BlinkTimer;
 
   async function removeCharacters(){
     await sleep(OutputFinal.length * delay + 4500)
@@ -49,7 +54,7 @@
   async function createText (){
       await sleep(loops * delay);
       for(let i = 1; i <= len; i++){
-        if(output.substring(i,i+4) === "<br/>"){
+        if(output.substring(i,i+4) == "<br/>"){
           loadText(jumble(output.substring(0, i+4), len), "target")
           i = i + 4;
         }else{
@@ -69,21 +74,18 @@
     html = _output;
     document.getElementById(target).innerHTML = html;
   }
-
-  function doit(){
-    output = OutputFinal;
-    len = OutputFinal.length;
-    intro();
-    createText();
-    removeCharacters();
-  }
-
-  document.addEventListener("DOMContentLoaded", function() {
-    doit();
-    clearInterval(BlinkTimer);
-  });
   export default {
     name: 'FroststridersMain',
+    data: () => ({ isVisible: false,  }),
+    mounted(){
+      output = OutputFinal;
+      len = OutputFinal.length;
+      setTimeout(function(){
+        intro();
+        createText();
+        removeCharacters();
+      },1000);
+    }
   }
 </script>
 
@@ -94,12 +96,48 @@
   color: #fceff9;
   font-family: "Unica One", monospace;
 }
+
+.borders{
+  width:30vw;
+  height:20vh;
+}
+.borders:nth-of-type(1){
+  position:fixed;
+  top:5vh;
+  left:5vw;
+  border-top:3px solid #fceff9;
+  border-left:3px solid #fceff9;
+}
+.borders:nth-of-type(2){
+  position:fixed;
+  top:5vh;
+  right:5vw;
+  border-top:3px solid #fceff9;
+  border-right:3px solid #fceff9;
+}
+.borders:nth-of-type(3){
+  position:fixed;
+  bottom:5vh;
+  left:5vw;
+  border-bottom:3px solid #fceff9;
+  border-left:3px solid #fceff9;
+}
+.borders:nth-of-type(4){
+  position:fixed;
+  bottom:5vh;
+  right:5vw;
+  border-bottom:3px solid #fceff9;
+  border-right:3px solid #fceff9;
+}
+
+
 .Froststriders_Cover{
   position:fixed;
   top:0px;
   left:0px;
   width:100%;
   height:100vh;
+  background:#101110;
 }
 .center {
   font-size: 60px;
