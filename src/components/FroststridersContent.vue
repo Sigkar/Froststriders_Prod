@@ -1,15 +1,24 @@
 <template>
     <div class="FroststridersContent">
         <div class="Hero_Section">
-            Froststriders
+            <div class="Hero">
+            </div>
         </div>
         <div class="Content_Display">
-            Content
+            <h2>TLAS</h2>
+            <h3>Threat</h3>
+            <h3>Level</h3>
+            <h3>Analysis</h3>
+            <h3>System</h3>
+            
         </div>
         <div class="Powered_By">
             <div class="Vast_Pinnacle_Logo_Container">
-                <h2 class="Vast_Pinnacle_Text">VAST<br/>PINNACLE</h2>
-                <img class="Vast_Pinnacle_Logo" src="../assets/VastPinnacle.svg" alt="Vast Pinnacle Logo"/>
+                <h2 class="Vast_Pinnacle_Text">
+                    <span class="heavy">V</span>AST
+                    <br/>PINNACLE
+                    <br/>GAMES</h2>
+                    <div class="Vast_Pinnacle_Logo"  alt="Vast Pinnacle Logo"/>
             </div>
         </div>
     </div>
@@ -22,35 +31,38 @@ export default {
 </script>
 
 <style scoped>
-    /* https://coolors.co/101110-2f2d2e-011936-bec4c4-d1a58a */
+    /* https://coolors.co/101110-4c4c47-fe5f55-023a7f-bec4c4 */
     .Hero_Section{
         width:100vw;
-        height:80vh;
-        background:#011936;
+        height:calc(80vh - 60px);
+        padding:30px 0px;
+    }
+    .Hero{
+        height:400px;
+        width:400px;
+        margin:0 auto;
+        background-image:url(../assets/Ice-Shelf-Cut.jpg);
+        background-size:contain;
     }
 
     .Content_Display{
         width:100vw;
         height:auto;
-        min-height:400px;
+        padding:30px 0px;
+        background:#4c4c47;
     }
 
     .Powered_By{
         width:100vw;
-        background:#bec4c4;
-        padding:30px 0;
+        background:white;
+        padding:30px 0px;
     }
     .Vast_Pinnacle_Logo_Container{
-        background:white;
-        width:30vw;
+        width:100vw;
         height:auto;
-        border:5px solid white;
-        width:30vw;
-        height:auto;
-        
 
         position:relative;
-        border-radius:30px;
+        border-radius:5px;
         
         left:50%;
         transform:translateX(-50%);
@@ -61,12 +73,30 @@ export default {
     }
     .Vast_Pinnacle_Logo{
         width:100%;
-        border-radius:30px;
+        max-width:450px;
+        margin:0 auto;
+        padding-top:50%;
+        background-repeat:no-repeat;
         transform:translateY(5px);
+        background-size:80%;
+        background-position:center top;
+        background-image:url(../assets/VastPinnacle.svg);
+    }
+    @media screen and (min-width:450px){
+        .Vast_Pinnacle_Logo{
+            padding-top:225px;
+        }
     }
     .Vast_Pinnacle_Text{
         text-align:center;
         letter-spacing:3px;
-        color:#a0a5a5;
+        color:#a0a5a5 !important;
+        font-weight:400 !important;
+        background:white;
+    }
+
+    .heavy{
+        font-weight:700;
+        color:#a0a5a5 !important;
     }
 </style>

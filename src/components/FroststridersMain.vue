@@ -1,26 +1,24 @@
 <template>
   
+  <Box class="box" :pose="isVisible ? 'visible' : 'hidden'">
     <div class="Froststriders_Cover" >
       
       <div class="center" id="content">
-        PROJECT FROSTSTRIDERS:
+        PROJECT:
         <br/>
         <div id="target">&nbsp;</div>
       </div>
     </div>
+  </Box>
 </template>
 
 <script>
-  //import vue from 'vue';
-  //import posed from "vue-pose";
-
+  import posed from 'vue-pose';
 
   const OutputFinal = "FROSTSTRIDERS_TLAIR.INI()";
   const delay = 75;
   const loops = 20;
-
-  let output, html, len;
-
+  let html;
 
   function jumble(_current, _len) {
     let text;
@@ -31,34 +29,35 @@
     return text;
   }
   
-  async function intro () {
+  async function intro (_len) {
     let j = 0;
     while(j<=loops){
       j++;
       await sleep(delay);
-      loadText(jumble("", len), "target");
+      loadText(jumble("", _len), "target");
     }
     return 0;
   }
 
-  async function removeCharacters(){
-    await sleep(OutputFinal.length * delay + 4500)
-    for(let i = OutputFinal.length; i >= 0; i--){
-      html = OutputFinal.substring(0, i);
+  async function removeCharacters(_output){
+    await sleep(_output.length * delay + 4500)
+    for(let i = _output.length; i >= 0; i--){
+      html = _output.substring(0, i);
       html += "<span id='blinker'>█</span>";
       document.getElementById("target").innerHTML = html;
       await sleep(delay/3);
     }
   }
 
-  async function createText (){
+  async function createText (_output, _len){
       await sleep(loops * delay);
-      for(let i = 1; i <= len; i++){
-        if(output.substring(i,i+4) == "<br/>"){
-          loadText(jumble(output.substring(0, i+4), len), "target")
+      for(let i = 1; i <= _len; i++){
+        if(_output.substring(i,i+4) == "<br/>"){
+          await sleep(500);
+          loadText(jumble(_output.substring(0, i+4), _len), "target")
           i = i + 4;
         }else{
-          loadText(jumble(output.substring(0, i), len), "target")
+          loadText(jumble(_output.substring(0, i), _len), "target")
         }
         
         await sleep(delay);
@@ -75,26 +74,31 @@
     document.getElementById(target).innerHTML = html;
   }
   export default {
-    name: 'FroststridersMain',
-    data: () => ({ isVisible: false,  }),
+    name: 'FroststridersMain', 
+    data: () => ({ isVisible: false }),
+    components: {
+      Box: posed.div({
+        visible: { opacity: 1 },
+        hidden: { opacity: 0 }
+      })
+    },
     mounted(){
-      output = OutputFinal;
-      len = OutputFinal.length;
-      setTimeout(function(){
-        intro();
-        createText();
-        removeCharacters();
-      },1000);
-    }
+      const stringToOutput = "TLAS.INIT()...<br/>FROSTSTRIDER_UI_LOAD()...<br/>COMPLETE";
+      intro(stringToOutput.length);
+      createText(stringToOutput, stringToOutput.length);
+      // setTimeout(() => {
+      //   this.isVisible = !this.isVisible;
+      // }, ((delay * loops) + (stringToOutput.length * delay) + 2000));
+    },
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 @import url("https://fonts.googleapis.com/css?family=Unica+One");
-* {
-  color: #fceff9;
-  font-family: "Unica One", monospace;
+.Froststriders_Cover * {
+  color: #fceff9 !important;
+  font-family: "Unica One", monospace !important;
 }
 
 .borders{
@@ -138,6 +142,7 @@
   width:100%;
   height:100vh;
   background:#101110;
+  z-index:20000000;
 }
 .center {
   font-size: 60px;

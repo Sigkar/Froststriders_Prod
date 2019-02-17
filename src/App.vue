@@ -19,9 +19,20 @@ export default {
 </script>
 
 <style>
-
+ @import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+* {
+  color: #fceff9;
+  font-family: 'Nunito', Arial, Helvetica, sans-serif;
+  text-transform:uppercase;
+  font-weight:400;
+}
+h1{font-size:32px; font-weight:700;}
+h2{font-size:28px;}
+h3{font-size:25px;}
+p,li,h4{font-size:22px;}
+h5{font-size:16px;}
+h6{font-size:12px;}
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
